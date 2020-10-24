@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        .logout-p {
+            background: blueviolet;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+    <title>Instagram</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color:blueviolet">
+            <a class="navbar-brand" href="/">Instagram</a>
+        </nav>
+
+        <br/>
+        <h3>Welcome To Instagram</h3>{% if user %}
+        <p>Hello {{ user.email() }}</p>
+        <a href="/create_post" class="btn btn-primary">Create New Post</a>
+        <a href="/profile_page?user={{user.email()}}" class="btn btn-primary">Profile Page</a>
+        <a href="/search_user" class="btn btn-primary">Search</a>
+        <br/><br/><br/>
+        <p class="font-weight-bold">TIMELINE</p>
+        <div>
+            {% for pic in user_timeline_list|sort(attribute='time', reverse = True) %} {% if loop.index
+            <=50 %} <img src="{{ pic.image }}" width="50%" />
+            <i>Caption-> </i>{{ pic.text_caption }}
+            <p class="font-weight-bold">Comments-></p>
+            {% for comm in pic.user_comment|sort(attribute='time', reverse = True) %} {% if loop.index
+            <=5 %} <li><strong>{{ comm.email }}--></strong> {{ comm.user_comment }}</li>
+
+                {% endif %} {% endfor %} {% if pic.user_comment|length > 5%}
+                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                        Expand
+                      </button>
+                <div class="collapse" id="collapseExample">
+                    <div class="card card-body">
+                        {% for comm in pic.user_comment|sort(attribute='time', reverse = True) %} {% if pic.user_comment|length > 5 %}
+                        <li><strong>{{ comm.email }}--></strong> {{ comm.user_comment }}</li>
+                        {% endif %}{% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+                </ul>
+
+                <p class="font-weight-bold">Add Comment(200 chars max)--></p>
+                <form method="post" action="/?id={{pic.key.id()}}">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <textarea type="text" class="form-control" name="comment" maxlength="200" required></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" name="button" value="add_comment">Submit</button>
+                </form>
+                <br><br> {% endif %} {% endfor %}
+        </div>{% endif %}
+
+        <div class="logout">
+            <p>you can {{ url_string }} <a class="logout-p" href='{{ url }}'>here</a></p>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </div>
+</body>
+
+</html>

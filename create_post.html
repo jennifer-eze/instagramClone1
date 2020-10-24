@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Instagram</title>
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color:blueviolet">
+            <a class="navbar-brand" href="/">Instagram</a>
+        </nav>
+
+        <div class="container">
+            <br>
+            <p>Upload New Post</p>
+            <form method="post" action="{{ upload }}" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="exampleFormControlFile1">Picture</label>
+                    <input type="file" class="form-control-file" name="picture" required>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="exampleFormControlFile1">Caption</label>
+                        <input type="text" class="form-control" name="text_caption" required>
+                    </div>
+                </div>
+                <!-- <div class="form-group">
+                <label for="exampleFormControlFile1">Caption</label>
+                <input type="text" class="form-control-file" name="text_caption" required>
+            </div>  -->
+                <br>
+                <div>
+                    <button type="submit" name="button" value="add" class="btn btn-primary">Upload</button>
+                </div>
+
+
+                <div class="error">{{ error }}</div>
+                <div class="success">{{ success }}</div>
+
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

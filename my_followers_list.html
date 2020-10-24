@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Instagram</title>
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color:blueviolet">
+            <a class="navbar-brand" href="/">Instagram</a>
+        </nav>
+
+        <div class="container">
+            <br>
+            <p class="font-weight-bold">Followers</p>
+            <br> {% for c in followers %}
+            <ul>
+                <li><a class="rec" href="/profile_page?user={{c}}">{{c}}</a></li>
+            </ul>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+</html>
